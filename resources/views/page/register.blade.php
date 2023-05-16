@@ -104,7 +104,7 @@
                 <a class="btn btn-social-icon btn-vk" href="javascript:;"><i class="fa fa-vk"></i></a>
             </div>
             <div class="text-center">Already a member?
-                <a class="color-blue" href="{{ route('signin') }}">Login here</a>
+                <a class="color-blue" href="{{ route('login') }}">Login here</a>
             </div>
         </form>
     </div>

@@ -2,22 +2,28 @@
         <div id="sidebar-collapse">
             <div class="admin-block d-flex">
                 <div>
-                    <img src="./assets/img/admin-avatar.png" width="45px" />
+                    <img src="{{ asset('/') }}assets/img/admin-avatar.png" width="45px" />
                 </div>
                 <div class="admin-info">
-                    <div class="font-strong">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div><small>Administrator</small></div>
+                    <div class="font-strong">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div><small> {{ Auth::user()->role->name }}</small></div>
             </div>
             <ul class="side-menu metismenu">
                 <li>
-                    <a class="active" href="index.html"><i class="sidebar-item-icon fa fa-th-large"></i>
+                    <a class="active" href="{{ route('app.dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                         <span class="nav-label">Dashboard</span>
                     </a>
                 </li>
                 <li class="heading">FEATURES</li>
                 <li>
-                    <a href="{{ route('app.provider') }}"><i class="sidebar-item-icon fa fa-bookmark"></i>
-                        Provider
-                    </a>
+
+                    @if (Gate::allows('admin-permission'))
+                        <a href="{{ route('app.provider') }}"><i class="sidebar-item-icon fa fa-bookmark"></i>
+                        Provider </a>
+
+                    @endif
+
+
+
 
                     {{-- <ul class="nav-2-level collapse">
                         <li>

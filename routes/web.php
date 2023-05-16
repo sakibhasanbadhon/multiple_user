@@ -26,11 +26,12 @@ Route::get('/backend', function () {
 
 
 
-Route::prefix('app/')->name('app.')->middleware(['auth','is_provider'])->group(function(){
+Route::prefix('app/')->name('app.')->middleware(['auth','is_provider','provider_switch'])->group(function(){
     // this is dashboard route
     Route::get('/',[DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/provider',[DashboardController::class, 'provider'])->name('provider');
-    Route::get('/provider/status',[DashboardController::class, 'status'])->name('provider.status');
+    Route::get('provider',[DashboardController::class, 'provider'])->name('provider');
+    Route::post('provider/status',[DashboardController::class, 'status'])->name('provider.status');
+
 
 
     Route::get('customer/dashboard',function(){
@@ -43,13 +44,15 @@ Route::prefix('app/')->name('app.')->middleware(['auth','is_provider'])->group(f
 
 
 
+
 Auth::routes([
     'register'         => false,
     'password.confirm' => false,
     'password.email'   => false,
     'password.request' => false,
     'password.reset'   => false,
-    'password.update'  => false
+    'password.update'  => false,
+    'signin'           => false
 ]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

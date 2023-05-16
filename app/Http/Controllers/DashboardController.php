@@ -31,13 +31,15 @@ class DashboardController extends Controller
 
     public function status(Request $request)
     {
+        // return $request;
         if($request->ajax()){
+
 
             $status = User::find($request->row_id);
             $status->update([
                 'status' => $request->status_id,
             ]);
-            $output =['status'=>'success','message'=>'Brand status update successfully'];
+            $output =['status'=>'success','message'=>'status update successfully'];
             return response()->json($output);
         }
     }

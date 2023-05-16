@@ -11,7 +11,7 @@ use App\Http\Requests\RegisterRequest;
 class AuthController extends Controller
 {
     public function signupShowForm(){
-        
+
         if (Auth::check()) {
             return redirect()->route('login');
         }
@@ -30,13 +30,22 @@ class AuthController extends Controller
             'email'       => 'required|email|max:255',
             'bio'         => 'nullable|max:255',
             'description' => 'nullable',
+            'status'      =>'nullable',
             'password'    => 'required|max:30|confirmed',
         ]);
 
         // dd($request->all());
         $data = $request->except(['_token','password','password_confirmation']);
         $data['password']= Hash::make($request->password);
-        $data['role_id']= $request->role_id;
+
+        if ($request->role_id) {
+            $data['role_id']= $request->role_id;
+        } else {
+            $data['role_id']= 3;
+        }
+
+
+
         User::create($data);
 
 
@@ -49,18 +58,18 @@ class AuthController extends Controller
     }
 
 
-    public function signin(){
-        if (Auth::check() && Auth::user()->role->slug == 'admin') {
-            return redirect('app');
-            // return "This is Admin";
-        }elseif(Auth::check() && Auth::user()->role->slug = 'provider') {
-            return redirect('app');
+    // public function signin(){
+    //     if (Auth::check() && Auth::user()->role->slug == 'admin') {
+    //         return redirect('app');
+    //         // return "This is Admin";
+    //     }elseif(Auth::check() && Auth::user()->role->slug = 'provider') {
+    //         return redirect('app');
 
-        }elseif(Auth::check() && Auth::user()->role->slug = 'customer') {
-            return redirect('app.portal');
-        }
-        return view('page.signin');
-    }
+    //     }elseif(Auth::check() && Auth::user()->role->slug = 'customer') {
+    //         return redirect('app.portal');
+    //     }
+    //     return view('page.signin');
+    // }
 
     public function forgotPassword(){
         return view('frontend.auth.forgot');
