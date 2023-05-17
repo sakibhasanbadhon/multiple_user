@@ -196,29 +196,31 @@
         let provider = document.querySelector('.provider');
         let customer = document.querySelector('.customer');
 
-       let bio = document.querySelector('#bio');
-       let description = document.querySelector('#description');
-       let last_name = document.querySelector('#last_name');
+        let bio = document.querySelector('#bio');
+        let description = document.querySelector('#description');
+        let last_name = document.querySelector('#last_name');
 
+        bio.style.display='none';
+        description.style.display='none';
 
-       admin.addEventListener('click',function(){
-            bio.style.display='none';
-            last_name.style.display='block';
-            description.style.display='none';
-       });
+        admin.addEventListener('click',function(){
+                bio.style.display='none';
+                last_name.style.display='block';
+                description.style.display='none';
+        });
 
-       provider.addEventListener('click',function(){
-            bio.style.display='block';
-            last_name.style.display='block';
-            description.style.display='block';
+        provider.addEventListener('click',function(){
+                bio.style.display='block';
+                last_name.style.display='block';
+                description.style.display='block';
 
-       });
+        });
 
-       customer.addEventListener('click',function(){
-            bio.style.display='none';
-            last_name.style.display='block';
-            description.style.display='none';
-       });
+        customer.addEventListener('click',function(){
+                bio.style.display='none';
+                last_name.style.display='block';
+                description.style.display='none';
+        });
 
 
 

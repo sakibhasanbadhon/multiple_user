@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\CustomerVerify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
@@ -30,7 +32,7 @@ class AuthController extends Controller
             'email'       => 'required|email|max:255',
             'bio'         => 'nullable|max:255',
             'description' => 'nullable',
-            'status'      =>'nullable',
+            'status'      => 'nullable',
             'password'    => 'required|max:30|confirmed',
         ]);
 
@@ -46,10 +48,10 @@ class AuthController extends Controller
 
 
 
-        User::create($data);
+        $data = User::create($data);
 
 
-
+        Mail::to($request->email)->send(new CustomerVerify($data));
         return back()->with('success','Registration successfully');
 
         //dd($request->all());
