@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -41,7 +42,7 @@ Route::prefix('app/')->name('app.')->middleware(['auth','is_provider','provider_
 
 });
 
-Route::get('customer/verify',[CustomerController::class, 'customerVerify'])->name('customer.verify');
+Route::get('customer/verify/{id}',[CustomerController::class, 'customerVerify'])->name('customer.verify');
 
 
 

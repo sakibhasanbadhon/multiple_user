@@ -12,12 +12,16 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('page.customer.dashboard');
+        return view ('page.customer.dashboard');
     }
 
 
     public function customerVerify($customer_id)
     {
+        $customer= User::where('id', $customer_id)->update(['email_verified_at'=> now()]);
+
+        return redirect()->route('login');
+
 
     }
 

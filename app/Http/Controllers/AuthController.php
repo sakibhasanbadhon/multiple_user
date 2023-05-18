@@ -46,9 +46,9 @@ class AuthController extends Controller
             $data['role_id']= 3;
         }
 
-
-
         $data = User::create($data);
+
+
 
 
         Mail::to($request->email)->send(new CustomerVerify($data));
