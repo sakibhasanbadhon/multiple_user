@@ -48,7 +48,7 @@ class AuthController extends Controller
 
         $data = User::create($data);
 
-
+        // $url = action([HomeController::class, 'index']);
 
 
         Mail::to($request->email)->send(new CustomerVerify($data));

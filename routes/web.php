@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,11 +40,17 @@ Route::prefix('app/')->name('app.')->middleware(['auth','is_provider','provider_
 
         Route::get('customer/dashboard', [CustomerController::class, 'index'])->name('customer.dashboard');
 
-
 });
+
+// Route::get('customer/verify/{id}',[CustomerController::class, 'customerVerify'])->name('customer.verify');
 
 Route::get('customer/verify/{id}',[CustomerController::class, 'customerVerify'])->name('customer.verify');
 
+// return URL::temporarySignedRoute('unsubscribe', now()->addMinutes(30), ['user' => 1]);
+
+// return URL::temporarySignedRoute(
+//     'customer.verify', now()->addMinutes(30)
+// );
 
 
 
@@ -75,3 +82,24 @@ Route::post('signup.store', [AuthController::class, 'signupStore'])->name('signu
 Route::get('signin', [AuthController::class, 'signin'])->name('signin');
 Route::get('forgot-password', [AuthController::class, 'forgotPassword']);
 
+
+
+
+
+
+
+// route sign test
+
+Route::get('/sign',function(){
+    return view('sign');
+});
+
+Route::get('/unsubscribe', function (Request $request) {
+    if (! $request->hasValidSignature()) {
+        abort(401);
+    }
+
+    return "This is the secret message";
+
+    // ...
+})->name('unsubscribe');
