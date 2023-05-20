@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Mail\CustomerVerify;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -22,8 +23,6 @@ class AuthController extends Controller
 
     public function signupStore(Request $request)
     {
-
-
         $request->validate([
             'role_id'     => 'nullable',
             'first_name'  => 'required|max:255',
@@ -36,7 +35,8 @@ class AuthController extends Controller
             'password'    => 'required|max:30|confirmed',
         ]);
 
-        // dd($request->all());
+        $verify_url = URL::temporarySignedRoute('customer.verify', now()->addSeconds(30), ['id' => $request->email]);
+
         $data = $request->except(['_token','password','password_confirmation']);
         $data['password']= Hash::make($request->password);
 
@@ -45,19 +45,18 @@ class AuthController extends Controller
         } else {
             $data['role_id']= 3;
         }
-
         $data = User::create($data);
 
-        // $url = action([HomeController::class, 'index']);
-
+        $data['verify_url'] = $verify_url;
 
         Mail::to($request->email)->send(new CustomerVerify($data));
+
         return back()->with('success','Registration successfully');
 
         //dd($request->all());
 
-
     }
+
 
 
     // public function signin(){

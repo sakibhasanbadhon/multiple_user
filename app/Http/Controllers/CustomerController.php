@@ -16,11 +16,14 @@ class CustomerController extends Controller
     }
 
 
-    public function customerVerify($customer_id)
+    public function customerVerify(Request $request,$customer_id)
     {
-        $customer= User::where('id', $customer_id)->update(['email_verified_at'=> now()]);
-
-        return redirect()->route('login');
+        if (! $request->hasValidSignature()) {
+            abort(401);
+        }else {
+            $customer= User::where('email', $customer_id)->update(['email_verified_at'=> now()]);
+            return redirect()->route('login');
+        }
 
 
     }
