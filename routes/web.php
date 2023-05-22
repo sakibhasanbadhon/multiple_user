@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
-
-
+use App\Http\Controllers\PasswordForgetController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,6 +43,9 @@ Route::prefix('app/')->name('app.')->middleware(['auth','is_provider','provider_
 
 Route::get('customer/verify/{id}',[CustomerController::class, 'customerVerify'])->name('customer.verify');
 
+
+Route::get('/password-forget',[PasswordForgetController::class, 'index'])->name('password-forget');
+Route::post('/password-forget/send',[PasswordForgetController::class, 'passwordSend'])->name('password-forget.send');
 
 
 

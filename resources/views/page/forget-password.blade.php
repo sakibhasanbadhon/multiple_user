@@ -20,33 +20,23 @@
 </head>
 
 <body class="bg-silver-300">
-    <div class="content">
+    <div class="content" style="transform: translateY(30%)">
         <div class="brand">
-            <a class="link" href="index.html">AdminCAST</a>
+            {{-- <a class="link" href="index.html">AdminCAST</a> --}}
         </div>
-        <form id="login-form" action="{{ route('login') }}" method="post">
+        <form id="login-form" action="{{ route('password-forget.send') }}" method="post">
             @csrf
-            <h2 class="login-title">Log in</h2>
+            <h2 class="login-title">Forget Password</h2>
             <div class="form-group">
                 <div class="input-group-icon right">
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
                     <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off">
                 </div>
             </div>
+
+
             <div class="form-group">
-                <div class="input-group-icon right">
-                    <div class="input-icon"><i class="fa fa-lock font-16"></i></div>
-                    <input class="form-control" type="password" name="password" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group d-flex justify-content-between">
-                <label class="ui-checkbox ui-checkbox-info">
-                    <input type="checkbox">
-                    <span class="input-span"></span>Remember me</label>
-                <a href="{{ route('password-forget') }}">Forgot password?</a>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-info btn-block" type="submit">Login</button>
+                <button class="btn btn-info btn-block" type="submit">Submit</button>
             </div>
             <div class="social-auth-hr">
                 <span>Or login with</span>
@@ -59,7 +49,7 @@
                 <a class="btn btn-social-icon btn-vk" href="javascript:;"><i class="fa fa-vk"></i></a>
             </div>
             <div class="text-center">Not a member?
-                <a class="color-blue" href="{{ url('signup') }}">Create accaunt</a>
+                <a class="color-blue" href="{{ url('login') }}">Login</a>
             </div>
         </form>
     </div>
@@ -80,8 +70,6 @@
     <!-- PAGE LEVEL SCRIPTS-->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
 
     <script>
 
@@ -136,13 +124,8 @@
         @endif
 
 
-
-
-
-
-
-
     </script>
+
 
 
     <script type="text/javascript">
