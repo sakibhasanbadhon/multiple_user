@@ -23,7 +23,7 @@ class ForgetPassword extends Mailable
     {
         $this->forget = $forget;
 
-        // dd($this->forget['email']);
+        // dd($this->forget['token']);
     }
 
     /**
@@ -46,8 +46,9 @@ class ForgetPassword extends Mailable
         return new Content(
             view: 'page.passwordMail',
             // with:[
-            //     'email'=>$this->forget['email']
-            // ]
+            //     'email' => $this->forget['email'],
+
+            // ],
         );
     }
 

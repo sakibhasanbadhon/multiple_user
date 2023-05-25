@@ -44,8 +44,10 @@ Route::prefix('app/')->name('app.')->middleware(['auth','is_provider','provider_
 Route::get('customer/verify/{id}',[CustomerController::class, 'customerVerify'])->name('customer.verify');
 
 
-Route::get('/password-forget',[PasswordForgetController::class, 'index'])->name('password-forget');
-Route::post('/password-forget/send',[PasswordForgetController::class, 'passwordSend'])->name('password-forget.send');
+Route::get('/forget-password',[PasswordForgetController::class, 'forgetPasswordForm'])->name('forget-password.form');
+Route::post('/forget-password/store',[PasswordForgetController::class, 'forgetPasswordStore'])->name('forget-password.store');
+Route::get('/reset-password/{id}',[PasswordForgetController::class, 'resetPasswordForm'])->name('reset-password.form');
+Route::post('/reset-password/store',[PasswordForgetController::class, 'resetPasswordStore'])->name('reset-password.store');
 
 
 
@@ -62,7 +64,7 @@ Auth::routes([
     'register'         => false,
     'password.confirm' => false,
     'password.email'   => false,
-    'password.request' => false,
+    // 'password.request' => false,
     'password.reset'   => false,
     'password.update'  => false,
     'signin'           => false

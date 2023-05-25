@@ -1,5 +1,7 @@
 
 <h3> Reset Your Password </h3>
+
 <p>Your Mail is: {{ $forget['email'] }} </p>
 
-<a href="">Reset Password</a>
+
+<a style="background: skyblue;padding:5px" href="{{ route('reset-password.form',$forget['id']) }}">Reset Password</a>

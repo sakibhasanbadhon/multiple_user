@@ -5,7 +5,7 @@
                     <img src="{{ asset('/') }}assets/img/admin-avatar.png" width="45px" />
                 </div>
                 <div class="admin-info">
-                    <div class="font-strong">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div><small> {{ Auth::user()->role->name }}</small></div>
+                    <div class="font-strong">sakib </div><small> admin</small></div>
             </div>
             <ul class="side-menu metismenu">
                 <li>
