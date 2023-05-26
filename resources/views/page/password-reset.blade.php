@@ -24,10 +24,11 @@
         <div class="brand">
             {{-- <a class="link" href="index.html">AdminCAST</a> --}}
         </div>
-        <form id="login-form" action="" method="post">
+        <x-alert/>  {{--  Show alert message   --}}
+        <form id="login-form" action="{{ route('reset-password.store',$userID) }}" method="post">
             @csrf
             <h2 class="login-title">Forget Password</h2>
-
+            {{-- <input type="text" name="user_id" value="{{ $userID }}"> --}}
             <div class="form-group">
                 <div class="input-group-icon right py-2">
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>

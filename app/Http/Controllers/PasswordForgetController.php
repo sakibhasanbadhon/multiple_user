@@ -57,40 +57,50 @@ class PasswordForgetController extends Controller
 
     public function resetPasswordForm($id)
     {
-        return view('page.password-reset');
+
+        return view('page.password-reset',['userID'=>$id]);
     }
 
 
 
-    public function resetStore(Request $request)
+    public function resetPasswordStore(Request $request, $userID)
     {
         // dd($request->all());
         $validation = $request->validate([
-            'old_password'          => 'required',
-            'new_password'          => 'required',
-            'password_confirmation' => 'required'
+            'old_password'  => 'required',
+            'new_password'  => 'required',
+
         ]);
 
+        $user = User::orderBy('id','DESC')->first();
 
-        $old_password = User::where(Hash::check('password'),$request->old_password);
-
-        if ($old_password) {
-            return "password Match";
-        }else {
-            return 'password mot match';
+        if (Hash::check($user->password == $request->old_password)) {
+            return "Password Match";
+        } else {
+            return 'Password does not match';
         }
 
 
 
+        // $user = User::where('id',$userID)->first();
+
+        // if (Hash::check('password', $request->password)) {
+
+            // User::where('id',$userID)->update([
+            //     'password' => Hash::check($request->password)
+            // ]);
+        //     return back()->with('success','Password Reset Successfully');
+
+        // } else {
+        //     return back()->with('error','Password Does\'t March');
+        // }
+
+
+
+
     }
 
 
 
-    public function resetPasswordStore()
-    {
-
-
-
-    }
 
 }

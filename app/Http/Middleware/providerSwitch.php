@@ -20,8 +20,6 @@ class providerSwitch
         if (Auth::check() && Auth::user()->status == 1)  {
             return $next($request);
 
-        }elseif (Auth::check() && Auth::user()->status != 1)  {
-            return $next($request);
         }else{
             Auth::logout();
             return redirect()->route('login')->with('error','Your account Disabled');

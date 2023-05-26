@@ -35,11 +35,11 @@ Route::prefix('app/')->name('app.')->middleware(['auth','is_provider','provider_
 
 });
 
-    Route::prefix('app/')->name('app.')->middleware(['verified'])->group(function(){
+    Route::prefix('app/')->name('app.')->middleware(['auth'])->group(function(){
 
         Route::get('customer/dashboard', [CustomerController::class, 'index'])->name('customer.dashboard');
 
-});
+    });
 
 Route::get('customer/verify/{id}',[CustomerController::class, 'customerVerify'])->name('customer.verify');
 
@@ -47,7 +47,7 @@ Route::get('customer/verify/{id}',[CustomerController::class, 'customerVerify'])
 Route::get('/forget-password',[PasswordForgetController::class, 'forgetPasswordForm'])->name('forget-password.form');
 Route::post('/forget-password/store',[PasswordForgetController::class, 'forgetPasswordStore'])->name('forget-password.store');
 Route::get('/reset-password/{id}',[PasswordForgetController::class, 'resetPasswordForm'])->name('reset-password.form');
-Route::post('/reset-password/store',[PasswordForgetController::class, 'resetPasswordStore'])->name('reset-password.store');
+Route::post('/reset-password/store/{id}',[PasswordForgetController::class, 'resetPasswordStore'])->name('reset-password.store');
 
 
 
@@ -55,7 +55,7 @@ Route::post('/reset-password/store',[PasswordForgetController::class, 'resetPass
 // Route::get();
 
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 
 
@@ -64,10 +64,12 @@ Auth::routes([
     'register'         => false,
     'password.confirm' => false,
     'password.email'   => false,
-    // 'password.request' => false,
+    'password.request' => false,
     'password.reset'   => false,
     'password.update'  => false,
-    'signin'           => false
+    'signin'           => false,
+    'verify'           => false,
+    'verification.notice'=> false
 ]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
