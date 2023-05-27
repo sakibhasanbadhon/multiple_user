@@ -25,7 +25,7 @@
             {{-- <a class="link" href="index.html">AdminCAST</a> --}}
 
         </div>
-        @include('include.alert')
+        <x-alert/>  {{--  Show alert message   --}}
         <form id="login-form" action="{{ route('forget-password.store') }}" method="post">
             @csrf
             <h2 class="login-title">Forget Password</h2>

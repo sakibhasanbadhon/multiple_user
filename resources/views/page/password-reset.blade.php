@@ -32,15 +32,15 @@
             <div class="form-group">
                 <div class="input-group-icon right py-2">
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
-                    <input class="form-control" type="text" name="old_password" placeholder="Old password" autocomplete="off">
-                    @error('old_password')
+                    <input class="form-control" type="email" name="email" placeholder="Your Email" autocomplete="off">
+                    @error('email')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="input-group-icon right py-2">
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
-                    <input class="form-control" type="text" name="new_password" placeholder="New password" autocomplete="off">
-                    @error('new_password')
+                    <input class="form-control" type="text" name="password" placeholder="New password" autocomplete="off">
+                    @error('password')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

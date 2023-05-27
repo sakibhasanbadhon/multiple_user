@@ -37,7 +37,7 @@ class PasswordForgetController extends Controller
             //     'created_at'=>Carbon::now()
             // ]);
 
-            // $request['token'] = $token;
+            // $request['token'] = $token;  // key baniye Token ke request a dhora holo 
             // $data = $request;
 
 
@@ -45,7 +45,7 @@ class PasswordForgetController extends Controller
 
             return Back()->with('success','Please Check Your Email');
         }else {
-            return Back()->with('error','Your Mail Does\'t match');
+            return back()->with('error','Password Does\'t March');
         }
 
 
@@ -67,33 +67,28 @@ class PasswordForgetController extends Controller
     {
         // dd($request->all());
         $validation = $request->validate([
-            'old_password'  => 'required',
-            'new_password'  => 'required',
+            'email'          => 'required',
+            'password'       => 'required|confirmed',
+            // 'password_confirmation' => 'required'
 
         ]);
 
-        $user = User::orderBy('id','DESC')->first();
 
-        if (Hash::check($user->password == $request->old_password)) {
-            return "Password Match";
+
+        $user = User::where('id',$userID)->first();
+        if ($user) {
+
+            // User::where('email', $request->email)
+            //           ->update(['password' => Hash::make($request->password)]);
+
+            User::where('email',$request->email)
+                    ->update(['password' => Hash::make($request->password)]);
+
+            return back()->with('success','Password Reset Successfully');
+
         } else {
-            return 'Password does not match';
+            return back()->with('error','Password Does\'t March');
         }
-
-
-
-        // $user = User::where('id',$userID)->first();
-
-        // if (Hash::check('password', $request->password)) {
-
-            // User::where('id',$userID)->update([
-            //     'password' => Hash::check($request->password)
-            // ]);
-        //     return back()->with('success','Password Reset Successfully');
-
-        // } else {
-        //     return back()->with('error','Password Does\'t March');
-        // }
 
 
 
